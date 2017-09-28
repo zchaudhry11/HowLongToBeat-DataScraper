@@ -1,0 +1,19 @@
+c:\users\zia\documents\visual studio 2015\Projects\HLTBScraper\HLTBScraper\bin\Debug\HLTBScraper.exe.config
+c:\users\zia\documents\visual studio 2015\Projects\HLTBScraper\HLTBScraper\bin\Debug\HLTBScraper.exe
+c:\users\zia\documents\visual studio 2015\Projects\HLTBScraper\HLTBScraper\bin\Debug\HLTBScraper.pdb
+c:\users\zia\documents\visual studio 2015\Projects\HLTBScraper\HLTBScraper\obj\Debug\HLTBScraper.csprojResolveAssemblyReference.cache
+c:\users\zia\documents\visual studio 2015\Projects\HLTBScraper\HLTBScraper\obj\Debug\HLTBScraper.exe
+c:\users\zia\documents\visual studio 2015\Projects\HLTBScraper\HLTBScraper\obj\Debug\HLTBScraper.pdb
+C:\Users\Zia\documents\visual studio 2015\Projects\HLTBScraper\HLTBScraper\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Zia\documents\visual studio 2015\Projects\HLTBScraper\HLTBScraper\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Zia\documents\visual studio 2015\Projects\HLTBScraper\HLTBScraper\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\obj\Debug\HLTBScraper.csprojResolveAssemblyReference.cache
+C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\obj\Debug\HLTBScraper.csproj.CoreCompileInputs.cache
+C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\bin\Debug\HLTBScraper.exe.config
+C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\bin\Debug\HLTBScraper.exe
+C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\bin\Debug\HLTBScraper.pdb
+C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\obj\Debug\HLTBScraper.exe
+C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\obj\Debug\HLTBScraper.pdb

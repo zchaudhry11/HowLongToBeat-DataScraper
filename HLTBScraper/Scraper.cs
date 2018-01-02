@@ -79,7 +79,7 @@ namespace HLTBScraper
             // Loop through every page and get game entry info
             for (int i = 0; i < numPages; i++)
             {
-                HtmlNodeCollection gameEntries = doc.DocumentNode.SelectNodes("//*[starts-with(@class,'back_white shadow_box')]");
+                HtmlNodeCollection gameEntries = doc.DocumentNode.SelectNodes("//*[starts-with(@class,'back_dark shadow_box')]");
 
                 if (gameEntries == null)
                 {
@@ -94,10 +94,10 @@ namespace HLTBScraper
                     newGameEntry.gameID = gameID;
 
                     // Get game image
-                    HtmlNodeCollection gameImage = gameEntries[x].SelectNodes("//*[starts-with(@src,'gameimages')]");
+                    HtmlNode gameImage = gameEntries[x].ChildNodes[1].ChildNodes[1].ChildNodes[1];
 
-                    string imgUrl = gameImage[x].Attributes[0].Value;
-                    string gameDetailsUrl = gameImage[x].ParentNode.Attributes[1].Value;
+                    string imgUrl = gameImage.Attributes[0].Value;
+                    string gameDetailsUrl = gameEntries[x].ChildNodes[3].ChildNodes[1].ChildNodes[0].Attributes[2].Value;
 
                     imgUrl = imgUrl.Replace(",", "^^^^"); // Replace commas with ^^^^ to prevent comma issues in csv
 
@@ -105,15 +105,19 @@ namespace HLTBScraper
                     newGameEntry.gameDetailsUrl = gameDetailsUrl;
 
                     // Get completion details
-                    HtmlNodeCollection gameTitles = gameEntries[x].SelectNodes("//*[starts-with(@class,'text_')]");
-
-                    string gameTitle = gameTitles[x].ChildNodes[0].InnerText;
+                    string gameTitle = gameEntries[x].ChildNodes[1].ChildNodes[1].Attributes[0].Value;
 
                     gameTitle = gameTitle.Replace(",", "^^^^");
 
                     newGameEntry.gameName = gameTitle;
 
-                    HtmlNodeCollection gameDetails = gameEntries[x].SelectNodes("//*[starts-with(@class,'search_list_details_block')]");
+                    HtmlNode gameDetails = gameEntries[x].ChildNodes[3].ChildNodes[3];
+
+                    // If it is a normal entry or a legacy entry
+                    if (gameDetails.ChildNodes.Count > 13 || gameDetails.ChildNodes.Count == 3)
+                    {
+                        gameDetails = gameDetails.ChildNodes[1];
+                    }
 
                     string mainStoryLength = "N/A";
                     string mainExtraLength = "N/A";
@@ -122,68 +126,25 @@ namespace HLTBScraper
 
                     char[] separatingChars = { ' ', '\n' };
 
-                    // Make sure game has time entries filled in
-                    if (gameDetails[x].ChildNodes.Count >= 2)
+                    // Loop through all game details entries
+                    for (int index = 3; index < gameDetails.ChildNodes.Count; index += 4)
                     {
-                        // Main story length
-                        mainStoryLength = gameDetails[x].ChildNodes[1].InnerText;
+                        string detailEntry = gameDetails.ChildNodes[index].InnerText; // Retrieve the text about a game's length. Ex. "25 hours"
 
-                        string[] results = mainStoryLength.Split(separatingChars, System.StringSplitOptions.RemoveEmptyEntries);
+                        string[] results = detailEntry.Split(separatingChars, System.StringSplitOptions.RemoveEmptyEntries); // Split entry to get rid of non-number text
 
-                        // If game is a normal entry
-                        if (results.Length >= 8) // Each length creates 2 array entries if it is empty and 4 if it was assigned a value. The minimum amount of entries is 8 and the maximum is 16
-                        {
-                            // Every game length was filled out
-                            if (results.Length == 16)
-                            {
-                                mainStoryLength = results[2].Replace("&#189;", ".5");
-                                mainExtraLength = results[7].Replace("&#189;", ".5");
-                                completionistLength = results[10].Replace("&#189;", ".5");
-                                combinedLength = results[14].Replace("&#189;", ".5");
-                            }
-                            else // Game lengths are missing so find the first valid game length and use it for every length band
-                            {
-                                // Loop through the split string and populate the game lengths
-                                for (int q = 0; q < results.Length; q++)
-                                {
-                                    string length = results[q].Replace("&#189;", ".5");
+                        if (results[0] == "--")
+                            results[0] = "-1";
 
-                                    if (float.TryParse(length, out var time)) {
-                                        mainStoryLength = length;
-                                        mainExtraLength = length;
-                                        completionistLength = length;
-                                        combinedLength = length;
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        mainStoryLength = "N/A";
-                                        mainExtraLength = "N/A";
-                                        completionistLength = "N/A";
-                                        combinedLength = "N/A";
-                                    }
-                                }
-                            }
-                        }
-                        else // If game does not follow standard entry pattern (Game is listed as 'Co-Op, Vs., or Solo and does not have every length filled out)
-                        {
-                            mainStoryLength = gameDetails[x].ChildNodes[3].InnerText;
-
-                            if (!mainStoryLength.Contains("--"))
-                            {
-                                results = mainStoryLength.Split(separatingChars, System.StringSplitOptions.RemoveEmptyEntries);
-
-                                // If not every game length exists, set all to the time that was provided
-                                mainStoryLength = results[0].Replace("&#189;", ".5");
-                                mainExtraLength = results[0].Replace("&#189;", ".5");
-                                completionistLength = results[0].Replace("&#189;", ".5");
-                                combinedLength = results[0].Replace("&#189;", ".5");
-                            }
-                            else
-                            {
-                                mainStoryLength = "N/A";
-                            }
-                        }
+                        // Assign game lengths. Every 4th index is a game length
+                        if (index == 3)
+                            mainStoryLength = results[0].Replace("&#189;", ".5");
+                        else if (index == 7)
+                            mainExtraLength = results[0].Replace("&#189;", ".5");
+                        else if (index == 11)
+                            completionistLength = results[0].Replace("&#189;", ".5");
+                        else if (index == 15)
+                            combinedLength = results[0].Replace("&#189;", ".5");
                     }
 
                     newGameEntry.mainStoryLength = mainStoryLength;
@@ -199,15 +160,11 @@ namespace HLTBScraper
                         Console.ForegroundColor = ConsoleColor.White;
 
                         // Print game lengths
-                        //Console.WriteLine(mainStoryLength);
-                        //Console.WriteLine(mainExtraLength);
-                        //Console.WriteLine(completionistLength);
-                        //Console.WriteLine(combinedLength);
-                        //Console.WriteLine("-------------------------------");
-
-                        //Console.WriteLine(gameImage[x].Attributes[0].Value); // Print img url
-                        //Console.WriteLine(gameImage[x].ParentNode.Attributes[1].Value); // Print details url
-                        //Console.WriteLine(gameTitles[x].ChildNodes[0].InnerText); // Print game title
+                        Console.WriteLine(mainStoryLength);
+                        Console.WriteLine(mainExtraLength);
+                        Console.WriteLine(completionistLength);
+                        Console.WriteLine(combinedLength);
+                        Console.WriteLine("-------------------------------");
                     }
 
                     // Write game to file

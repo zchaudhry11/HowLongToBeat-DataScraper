@@ -17,3 +17,13 @@ C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\bin\Debug\HtmlAgi
 C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\bin\Debug\HtmlAgilityPack.xml
 C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\obj\Debug\HLTBScraper.exe
 C:\Users\Zia\Documents\GitHub\HowLongToBeatScraper\HLTBScraper\obj\Debug\HLTBScraper.pdb
+C:\Users\Zia\Documents\GitHub\HowLongToBeat-DataScraper\HLTBScraper\bin\Debug\HLTBScraper.exe.config
+C:\Users\Zia\Documents\GitHub\HowLongToBeat-DataScraper\HLTBScraper\bin\Debug\HLTBScraper.exe
+C:\Users\Zia\Documents\GitHub\HowLongToBeat-DataScraper\HLTBScraper\bin\Debug\HLTBScraper.pdb
+C:\Users\Zia\Documents\GitHub\HowLongToBeat-DataScraper\HLTBScraper\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Zia\Documents\GitHub\HowLongToBeat-DataScraper\HLTBScraper\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Zia\Documents\GitHub\HowLongToBeat-DataScraper\HLTBScraper\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Zia\Documents\GitHub\HowLongToBeat-DataScraper\HLTBScraper\obj\Debug\HLTBScraper.csprojResolveAssemblyReference.cache
+C:\Users\Zia\Documents\GitHub\HowLongToBeat-DataScraper\HLTBScraper\obj\Debug\HLTBScraper.csproj.CoreCompileInputs.cache
+C:\Users\Zia\Documents\GitHub\HowLongToBeat-DataScraper\HLTBScraper\obj\Debug\HLTBScraper.exe
+C:\Users\Zia\Documents\GitHub\HowLongToBeat-DataScraper\HLTBScraper\obj\Debug\HLTBScraper.pdb
